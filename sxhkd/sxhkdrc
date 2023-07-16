@@ -25,6 +25,10 @@ alt + shift + q
 alt + shift + r
     /home/pavan/.config/bspwm/bspwmrc
 
+# lock screen
+alt + shift + x
+    i3lock
+
 # close and kill
 alt + q
     bspc node -c
@@ -97,6 +101,12 @@ alt + {1-5}
 
 alt + shift + {1-5}
     bspc node -d '^{1-5}'
+
+alt + p
+    bspc node -d prev
+
+alt + n
+    bspc node -d next
 
 # alt + {_,shift + }{1-9,0}
 # 	bspc {desktop -f,node -d} '^{1-9,10}'
