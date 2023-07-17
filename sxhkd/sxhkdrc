@@ -3,7 +3,7 @@
 #
 
 # terminal emulator
-alt + Return
+alt + shift + Return
 	alacritty
 
 # program launcher
@@ -13,6 +13,14 @@ alt + space
 # make sxhkd reload its configuration files:
 alt + Escape
 	pkill -USR1 -x sxhkd
+
+# tdrop
+alt + Return
+    tdrop -ma -w 70% -h 80% -x 15% -y 10% alacritty
+
+# Launch file manager
+alt + e
+    tdrop -ma -w 70% -h 80% -x 15% -y 10% thunar
 
 #
 # bspwm hotkeys
@@ -44,10 +52,6 @@ super + y
 # swap the current node and the biggest window
 super + g
 	bspc node -s biggest.window
-
-# Launch file manager
-alt + e
-    thunar
 
 #
 # state/flags
@@ -96,11 +100,11 @@ super + {o,i}
 	bspc wm -h on
 
 # focus or send to the given desktop
-alt + {1-5}
-    bspc desktop -f '^{1-5}'
+alt + {1-9}
+    bspc desktop -f '^{1-9}'
 
-alt + shift + {1-5}
-    bspc node -d '^{1-5}'
+alt + shift + {1-9}
+    bspc node -d '^{1-9}'
 
 alt + p
     bspc node -d prev
@@ -146,3 +150,4 @@ ctrl + alt + shift + {h,j,k,l}
 # move a floating window
 alt + {Left,Down,Up,Right}
 	bspc node -v {-20 0,0 20,0 -20,20 0}
+

@@ -2,9 +2,9 @@
 
 pgrep -x sxhkd > /dev/null || sxhkd &
 
-bspc monitor -d     
+bspc monitor -d         
 
-bspc config border_width         4
+bspc config border_width         2
 bspc config window_gap           0
 
 bspc config split_ratio           0.52
@@ -13,14 +13,8 @@ bspc config gapless_monocle       true
 bspc config focus_follows_pointer true
 bspc config top_padding           0
 
-bspc rule -a Gimp desktop='^8' state=floating follow=on
-bspc rule -a Chromium desktop='^2'
-bspc rule -a mplayer2 state=floating
-bspc rule -a Kupfer.py focus=on
-bspc rule -a Screenkey manage=off
-
-bspc config focused_border_color "#ff373B41"
-bspc config normal_border_color "#ff000000"
+bspc config focused_border_color "#303030"
+bspc config normal_border_color "#101010"
 
 bspc rule -a Ulauncher border=off
 bspc rule -a TelegramDesktop desktop=
@@ -31,6 +25,8 @@ killall -q polybar
 feh --bg-scale ~/Pictures/wallpaper.jpg
 killall -q ulauncher
 ulauncher &
+nm-applet &
+blueman-applet &
 $HOME/Software/Telegram/Telegram
 xinput set-prop 11 300 1 # Natural Scrolling
 xinput set-prop 11 323 1 # Tapping

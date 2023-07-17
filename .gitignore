@@ -1,0 +1,11 @@
+*
+!/.gitignore
+!/.gitkeep
+!/.vimrc
+!/alacritty
+!/bspwm
+!/polybar
+!/ulauncher
+!/starship.toml
+!/sxhkd
+!/
