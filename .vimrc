@@ -40,6 +40,7 @@ set incsearch "incremental searching
 set nohlsearch "no highlighting last searches
 set ignorecase "searching is not case sensitive
 set smartcase "if a pattern contains uppercase, searching is case sensitive
+set smartindent "indents according to language type of the file
 " set autochdir "Automatically change the current directory
 set clipboard^=unnamed,unnamedplus "use system clipboard
 set noeb vb t_vb= "remove error bells
@@ -176,6 +177,11 @@ if filereadable(expand("~/.vim/autoload/plug.vim"))
         " CoC
         Plug 'neoclide/coc.nvim', {'branch': 'release'}
 
+        " Web development
+        Plug 'yuezk/vim-js'
+        Plug 'HerringtonDarkholme/yats.vim'
+        Plug 'maxmellon/vim-jsx-pretty' 
+
         " Language Support
         Plug 'fatih/vim-go'
         Plug 'rust-lang/rust.vim'
@@ -226,6 +232,12 @@ if filereadable(expand("~/.vim/autoload/plug.vim"))
       \ 'coc-flutter',
       \ 'coc-snippets',
       \ 'coc-yaml',
+      \ 'coc-html',
+      \ 'coc-eslint',
+      \ 'coc-tsserver',
+      \ 'coc-json',
+      \ 'coc-prettier',
+      \ 'coc-css'
       \ ]
 
     """"""""""""""""""""""

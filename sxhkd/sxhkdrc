@@ -26,6 +26,10 @@ super + Return
 alt + e
     tdrop -ma -w 70% -h 80% -x 15% -y 10% thunar
 
+# Work session
+alt + s
+    tdrop -ma -w 100% -h 100% -n 2 alacritty
+
 #
 # bspwm hotkeys
 #
@@ -44,10 +48,6 @@ alt + shift + x
 # close and kill
 alt + q
     bspc node -c
-
-# alternate between the tiled and monocle layout
-# alt + f
-# 	bspc desktop -l next
 
 # send the newest marked node to the newest preselected node
 super + y
@@ -115,9 +115,6 @@ alt + p
 
 alt + n
     bspc node -d next
-
-# alt + {_,shift + }{1-9,0}
-# 	bspc {desktop -f,node -d} '^{1-9,10}'
 
 #
 # preselect
