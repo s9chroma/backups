@@ -40,7 +40,6 @@ set incsearch "incremental searching
 set nohlsearch "no highlighting last searches
 set ignorecase "searching is not case sensitive
 set smartcase "if a pattern contains uppercase, searching is case sensitive
-set smartindent "indents according to language type of the file
 " set autochdir "Automatically change the current directory
 set clipboard^=unnamed,unnamedplus "use system clipboard
 set noeb vb t_vb= "remove error bells
@@ -48,6 +47,8 @@ set t_vb= "remove visual bells
 set backspace=indent,eol,start " more powerful backspacing
 set shortmess=aoOtIF " avoid most of the 'Hit Enter ...' messages
 set laststatus=2 "always show status line
+
+filetype indent on
 
 " Interface
 set background=dark
@@ -149,6 +150,24 @@ let g:netrw_list_hide=ghregex
 nmap <Leader>V :Vex!<CR>
 nmap <Leader>H :Sex<CR>
 nmap <Leader>y :Tex<CR>
+
+" HTML
+" Auto-run Tidy on save for HTML files and press <CR> afterwards
+function! RunTidy()
+    let save_cursor = getpos('.')
+    let save_status = v:statusmsg
+
+    " Redirect standard error (2) to /dev/null to suppress warnings
+    silent! %!tidy -indent -wrap 0 -quiet 2>/dev/null
+
+    call setpos('.', save_cursor)
+    redraw!
+    echo save_status
+endfunction
+
+autocmd BufWritePost *.html call RunTidy()
+autocmd Filetype html setlocal expandtab tabstop=2 shiftwidth=2 softtabstop=2
+
 
 """"""""""""""""""""""
 """ Plugins

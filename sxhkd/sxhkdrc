@@ -27,7 +27,7 @@ alt + e
     tdrop -ma -w 70% -h 80% -x 15% -y 10% thunar
 
 # Work session
-alt + s
+alt + w
     tdrop -ma -w 100% -h 100% -n 2 alacritty
 
 #
