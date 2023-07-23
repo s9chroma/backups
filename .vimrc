@@ -615,4 +615,4 @@ let g:terminal_ansi_colors += [s:palette.tag, s:palette.constant]
 let g:terminal_ansi_colors += [s:palette.regexp, s:palette.comment]
 
 " Removes background in case of using transparency
-" hi Normal guibg=NONE ctermbg=NONE
+hi Normal guibg=NONE ctermbg=NONE

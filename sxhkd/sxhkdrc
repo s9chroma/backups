@@ -28,7 +28,7 @@ alt + e
 
 # Work session
 alt + w
-    tdrop -ma -w 100% -h 100% -n 2 alacritty
+    tdrop -ma -w -4 -h -4 -x 0 -y 0 -n 2 alacritty
 
 #
 # bspwm hotkeys
