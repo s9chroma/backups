@@ -20,7 +20,7 @@ alt + Return
 
 # tdrop
 super + Return
-    tdrop -ma -w 70% -h 80% -x 15% -y 10% -n 1 alacritty
+    tdrop -ma -w 80% -h 80% -x 10% -y 10% -n 1 alacritty
 
 # Launch file manager
 alt + e
