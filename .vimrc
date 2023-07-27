@@ -140,7 +140,7 @@ if has("win32")
     nmap <Leader>e :!start explorer /select,%:p<CR><CR>
 endif
 if has("unix")
-    nmap <Leader>e :!nautilus .<CR><CR>
+    nmap <Leader>e :!thunar .<CR><CR>
 endif
 
 
@@ -163,6 +163,7 @@ function! RunTidy()
     call setpos('.', save_cursor)
     redraw!
     echo save_status
+    write
 endfunction
 
 autocmd BufWritePost *.html call RunTidy()
