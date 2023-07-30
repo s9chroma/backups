@@ -28,5 +28,5 @@ ulauncher &
 nm-applet &
 blueman-applet &
 $HOME/Software/Telegram/Telegram
-xinput set-prop 9 300 1 # Natural Scrolling
-xinput set-prop 9 308 1 # Tapping
+xinput set-prop 11 300 1 # Natural Scrolling
+xinput set-prop 11 323 1 # Tapping

@@ -47,6 +47,7 @@ set t_vb= "remove visual bells
 set backspace=indent,eol,start " more powerful backspacing
 set shortmess=aoOtIF " avoid most of the 'Hit Enter ...' messages
 set laststatus=2 "always show status line
+set foldmethod=syntax
 
 filetype indent on
 
@@ -188,6 +189,7 @@ if filereadable(expand("~/.vim/autoload/plug.vim"))
         Plug 'qpkorr/vim-bufkill' " Emacs kill-buffer
         Plug 'jiangmiao/auto-pairs' " Auto close parenthesis/brackets
         Plug 'ap/vim-css-color' " Color hex code highlighting
+        Plug 'pseewald/vim-anyfold' " Folding
 
         " Snippets
         " Plug 'SirVer/ultisnips'
@@ -206,8 +208,14 @@ if filereadable(expand("~/.vim/autoload/plug.vim"))
         Plug 'fatih/vim-go'
         Plug 'rust-lang/rust.vim'
         Plug 'dart-lang/dart-vim-plugin'
-        Plug 'thosakwe/vim-flutter'
     call plug#end()
+
+    """"""""""""""""""""""
+    """ AnyFold 
+    """"""""""""""""""""""
+    autocmd Filetype * AnyFoldActivate
+    let g:anyfold_fold_comments=1
+    set foldlevel=99
 
     """"""""""""""""""""""
     """ CoC 
@@ -367,33 +375,22 @@ if filereadable(expand("~/.vim/autoload/plug.vim"))
     let g:dart_format_on_save = 1
     let g:dartfmt_options = ['--fix', '--line-length 120']
     autocmd Filetype dart setlocal expandtab tabstop=2 shiftwidth=2 softtabstop=2
-
-    " Flutter
-    let g:flutter_autoscroll = 1 
-    let g:flutter_use_last_run_option = 1
-    autocmd FileType dart map <buffer> <Leader>pr :call FlutterSplitRun()<CR>
-    autocmd FileType dart map <buffer> <Leader>pp :FlutterHotRestart<CR>
-
-    function! FlutterSplitRun()
-        execute "FlutterRun -d Linux"
-        execute "FlutterTab"
-        execute "tabprevious"
-        execute "close"
-    endfunction
 endif
 
 """"""""""""""""""""""
 """ GUI Settings
 """"""""""""""""""""""
 if has("gui")
-    set guifont=FiraMono_NF:h14:W500
+    set guifont=Iosevka_NF:h14:W500
     set guioptions-=m  "remove menu bar
     set guioptions-=T  "remove toolbar
     set guioptions-=r  "remove scrollbar
     set guioptions-=L  "remove left scrollbar
     set guioptions-=e  "remove gui tabs
     au GUIEnter * set vb t_vb= "remove gui error bells
-    au GUIEnter * simalt ~x "start fullscreen
+    if has("win32")
+        au GUIEnter * simalt ~x "start fullscreen
+    endif
 end
 
 """"""""""""""""""""""
@@ -616,4 +613,6 @@ let g:terminal_ansi_colors += [s:palette.tag, s:palette.constant]
 let g:terminal_ansi_colors += [s:palette.regexp, s:palette.comment]
 
 " Removes background in case of using transparency
-hi Normal guibg=NONE ctermbg=NONE
+if !has("win32")
+    hi Normal guibg=NONE ctermbg=NONE
+endif

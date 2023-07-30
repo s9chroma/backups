@@ -112,8 +112,24 @@ if ! shopt -oq posix; then
   fi
 fi
 
-export PATH="$PATH:/usr/sbin:/home/pavan/Software/flutter/bin"
+export PATH="$PATH:/usr/sbin:/home/pavan/Software/flutter/bin:/home/pavan/Software/Android/Sdk/platform-tools"
 eval "$(starship init bash)"
 alias update="sudo apt update -y && sudo apt upgrade -y && sudo apt autoremove -y"
 alias v="vim"
 alias winmount="mkdir -p win && sudo mount /dev/nvme0n1p3 win"
+
+# >>> conda initialize >>>
+# !! Contents within this block are managed by 'conda init' !!
+__conda_setup="$('/home/pavan/Software/miniconda3/bin/conda' 'shell.bash' 'hook' 2> /dev/null)"
+if [ $? -eq 0 ]; then
+    eval "$__conda_setup"
+else
+    if [ -f "/home/pavan/Software/miniconda3/etc/profile.d/conda.sh" ]; then
+        . "/home/pavan/Software/miniconda3/etc/profile.d/conda.sh"
+    else
+        export PATH="/home/pavan/Software/miniconda3/bin:$PATH"
+    fi
+fi
+unset __conda_setup
+# <<< conda initialize <<<
+
