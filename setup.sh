@@ -4,7 +4,7 @@
 sudo apt update
 
 # Install software
-sudo apt install -y vim vim-gtk3 bspwm sxhkd polybar alacritty wget curl picom git nodejs npm gnome-tweaks make gcc
+sudo apt install -y vim vim-gtk3 bspwm sxhkd polybar alacritty wget curl picom git nodejs npm gnome-tweaks make gcc xdotool gawk ripgrep fzf
 
 # Install ULauncher
 wget https://github.com/Ulauncher/Ulauncher/releases/download/5.15.3/ulauncher_5.15.3_all.deb
@@ -15,28 +15,25 @@ sudo rm -r ./ulauncher_5.15.3_all.deb
 curl -fLo ~/.vim/autoload/plug.vim --create-dirs \
     https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
 
-# Install vimrc dependencies
-sudo apt install -y ripgrep fzf
-
 # Install tdrop
 git clone https://github.com/noctuid/tdrop
 cd tdrop
 sudo make install
 cd ..
-rm -r tdrop
+sudo rm -r tdrop
 
 # Download and install Iosevka Nerd Font
 wget https://github.com/ryanoasis/nerd-fonts/releases/download/v3.0.2/Iosevka.zip
 mkdir -p /usr/local/share/fonts
 sudo unzip Iosevka.zip -d /usr/local/share/fonts/
-rm -r Iosevka.zip
+sudo rm -r Iosevka.zip
 fc-cache -fv
 
 # Install starship
 wget https://starship.rs/install.sh
 chmod +x install.sh
 ./install.sh
-rm -r ./install.sh
+sudo rm -r ./install.sh
 
 # Download configs
 git clone https://github.com/s9chroma/backups.git
@@ -55,4 +52,4 @@ cp -r ulauncher ~/.config/
 cp -r polybar ~/.config/
 
 cd ..
-rm -r backups
+sudo rm -r backups
