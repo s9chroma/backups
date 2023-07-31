@@ -8,7 +8,7 @@ sudo apt install -y vim vim-gtk3 bspwm sxhkd polybar alacritty wget curl picom g
 
 # Install ULauncher
 wget https://github.com/Ulauncher/Ulauncher/releases/download/5.15.3/ulauncher_5.15.3_all.deb
-sudo apt install ./ulauncher_5.15.3_all.deb
+sudo apt install -y ./ulauncher_5.15.3_all.deb
 rm -r ./ulauncher_5.15.3_all.deb
 
 # Vim Plugin Setup
