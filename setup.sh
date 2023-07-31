@@ -4,7 +4,7 @@
 sudo apt update
 
 # Install software
-sudo apt install -y vim vim-gtk3 bspwm sxhkd polybar alacritty wget curl picom git nodejs npm gnome-tweaks google-chrome-stable
+sudo apt install -y vim vim-gtk3 bspwm sxhkd polybar alacritty wget curl picom git nodejs npm gnome-tweaks google-chrome-stable make gcc
 
 # Install ULauncher
 wget https://github.com/Ulauncher/Ulauncher/releases/download/5.15.3/ulauncher_5.15.3_all.deb
@@ -17,6 +17,13 @@ curl -fLo ~/.vim/autoload/plug.vim --create-dirs \
 
 # Install vimrc dependencies
 sudo apt install -y ripgrep fzf
+
+# Install tdrop
+git clone https://github.com/noctuid/tdrop
+cd tdrop
+sudo make install
+cd ..
+rm -r tdrop
 
 # Download and install Iosevka Nerd Font
 wget https://github.com/ryanoasis/nerd-fonts/releases/download/v3.0.2/Iosevka.zip
