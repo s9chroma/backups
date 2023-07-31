@@ -4,7 +4,7 @@
 sudo apt update
 
 # Install software
-sudo apt install -y vim vim-gtk3 bspwm sxhkd polybar alacritty wget curl ulauncher picom git nodejs npm
+sudo apt install -y vim vim-gtk3 bspwm sxhkd polybar alacritty wget curl picom git nodejs npm
 
 # Vim Plugin Setup
 curl -fLo ~/.vim/autoload/plug.vim --create-dirs \
