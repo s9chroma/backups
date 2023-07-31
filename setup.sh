@@ -26,9 +26,10 @@ rm -r Iosevka.zip
 fc-cache -fv
 
 # Install starship
-curl -sS https://starship.rs/install.sh
+wget https://starship.rs/install.sh
 chmod +x install.sh
 ./install.sh
+rm -r ./install.sh
 
 # Download configs
 git clone https://github.com/s9chroma/backups.git
