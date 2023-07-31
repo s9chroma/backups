@@ -16,12 +16,12 @@ sudo apt install ripgrep fzf
 # Download and install Iosevka Nerd Font
 wget https://github.com/ryanoasis/nerd-fonts/releases/download/v3.0.2/Iosevka.zip
 mkdir -p /usr/local/share/fonts
-unzip Iosevka.zip -d /usr/local/share/fonts/
+sudo unzip Iosevka.zip -d /usr/local/share/fonts/
 rm -r Iosevka.zip
 fc-cache -fv
 
 # Install starship
-curl -sS https://starship.rs/install.sh | sh
+yes | curl -sS https://starship.rs/install.sh | sh
 
 # Download configs
 git clone https://github.com/s9chroma/backups.git
