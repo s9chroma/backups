@@ -4,14 +4,14 @@
 sudo apt update
 
 # Install software
-sudo apt install vim bspwm sxhkd polybar alacritty wget curl ulauncher picom git
+sudo apt install -y vim bspwm sxhkd polybar alacritty wget curl ulauncher picom git
 
 # Vim Plugin Setup
 curl -fLo ~/.vim/autoload/plug.vim --create-dirs \
     https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
 
 # Install vimrc dependencies
-sudo apt install ripgrep fzf
+sudo apt install -y ripgrep fzf
 
 # Download and install Iosevka Nerd Font
 wget https://github.com/ryanoasis/nerd-fonts/releases/download/v3.0.2/Iosevka.zip
