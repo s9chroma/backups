@@ -4,7 +4,7 @@
 yes | sudo apt update
 
 # Install software
-yes | sudo apt install vim vim-gtk3 bspwm sxhkd polybar alacritty wget curl picom git nodejs npm gnome-tweaks make gcc xdotool gawk ripgrep fzf feh
+yes | sudo apt install vim vim-gtk3 bspwm sxhkd polybar alacritty wget curl picom git nodejs npm gnome-tweaks make gcc xdotool gawk ripgrep fzf feh blueman
 
 # Install ULauncher
 wget https://github.com/Ulauncher/Ulauncher/releases/download/5.15.3/ulauncher_5.15.3_all.deb
@@ -58,3 +58,8 @@ cp -r polybar ~/.config/
 
 cd ..
 sudo rm -r backups
+
+# Install chrome
+wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
+sudo apt install ./google-chrome-stable_current_amd64.deb
+sudo rm -r ./google-chrome-stable_current_amd64.deb
