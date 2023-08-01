@@ -50,6 +50,7 @@ cp .bashrc ~/
 cp .gtkrc-2.0 ~/
 cp picom.conf ~/.config/
 cp starship.toml ~/.config/
+cp -r gtk-3.0 ~/.config/
 cp -r alacritty ~/.config/
 cp -r bspwm ~/.config/
 cp -r sxhkd ~/.config/

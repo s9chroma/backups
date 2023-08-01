@@ -8,10 +8,11 @@
 !/.gtkrc-2.0
 !/wallpaper.jpg
 !/starship.toml
-!/bspwm
-!/sxhkd
-!/polybar
-!/gtk-3.0
-!/alacritty
-!/ulauncher
+!/bspwm/**
+!/sxhkd/**
+!/polybar/**
+!/gtk-3.0/**
+!/alacritty/**
+!/ulauncher/**
 !/
+
