@@ -55,6 +55,7 @@ cp -r bspwm ~/.config/
 cp -r sxhkd ~/.config/
 cp -r ulauncher ~/.config/
 cp -r polybar ~/.config/
+cp -r ulauncher ~/.config/
 
 cd ..
 sudo rm -r backups
