@@ -4,7 +4,7 @@
 yes | sudo apt update
 
 # Install software
-yes | sudo apt install vim vim-gtk3 bspwm sxhkd polybar alacritty wget curl picom git nodejs npm gnome-tweaks make gcc xdotool gawk ripgrep fzf
+yes | sudo apt install vim vim-gtk3 bspwm sxhkd polybar alacritty wget curl picom git nodejs npm gnome-tweaks make gcc xdotool gawk ripgrep fzf feh
 
 # Install ULauncher
 wget https://github.com/Ulauncher/Ulauncher/releases/download/5.15.3/ulauncher_5.15.3_all.deb
@@ -39,10 +39,15 @@ sudo rm -r ./install.sh
 git clone https://github.com/s9chroma/backups.git
 cd backups
 
+# Copy wallpaper
+mkdir -p ~/Pictures
+cp wallpaper.jpg ~/Pictures/
+
 # Install configs
 mkdir -p .config
 cp .vimrc ~/
 cp .bashrc ~/
+cp .gtkrc-2.0 ~/
 cp picom.conf ~/.config/
 cp starship.toml ~/.config/
 cp -r alacritty ~/.config/
