@@ -1,14 +1,14 @@
 #!/bin/bash
 
 # Update package lists
-sudo apt update
+yes | sudo apt update
 
 # Install software
-sudo apt install -y vim vim-gtk3 bspwm sxhkd polybar alacritty wget curl picom git nodejs npm gnome-tweaks make gcc xdotool gawk ripgrep fzf
+yes | sudo apt install vim vim-gtk3 bspwm sxhkd polybar alacritty wget curl picom git nodejs npm gnome-tweaks make gcc xdotool gawk ripgrep fzf
 
 # Install ULauncher
 wget https://github.com/Ulauncher/Ulauncher/releases/download/5.15.3/ulauncher_5.15.3_all.deb
-sudo apt install -y ./ulauncher_5.15.3_all.deb
+yes | sudo apt install -y ./ulauncher_5.15.3_all.deb
 sudo rm -r ./ulauncher_5.15.3_all.deb
 
 # Vim Plugin Setup
@@ -18,7 +18,7 @@ curl -fLo ~/.vim/autoload/plug.vim --create-dirs \
 # Install tdrop
 git clone https://github.com/noctuid/tdrop
 cd tdrop
-sudo make install
+yes | sudo make install
 cd ..
 sudo rm -r tdrop
 
@@ -32,7 +32,7 @@ fc-cache -fv
 # Install starship
 wget https://starship.rs/install.sh
 chmod +x install.sh
-./install.sh
+yes | ./install.sh
 sudo rm -r ./install.sh
 
 # Download configs
