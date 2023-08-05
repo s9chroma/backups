@@ -3,6 +3,7 @@
 !/.gitkeep
 !/.bashrc
 !/.vimrc
+!/.emacs
 !/setup.sh
 !/picom.conf
 !/.gtkrc-2.0
