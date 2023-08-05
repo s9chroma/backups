@@ -112,22 +112,14 @@
   :config
   (counsel-mode 1))
 
-(defconst my/nerd-icons-font-installed-p
-  (file-exists-p (expand-file-name "~/.local/share/fonts/NFM.ttf")))
-
 (use-package all-the-icons
-  :if (not my/nerd-icons-font-installed-p)
   :init
-  ;; Checks if all-the-icons is available on the system, 
-  ;; otherwise try to install it
-  (unless (package-installed-p 'all-the-icons)
+  (unless (or (package-installed-p 'all-the-icons)
+              (file-exists-p (expand-file-name "~/.local/share/fonts/NFM.ttf")))
     (package-refresh-contents)
-    (package-install 'all-the-icons))
-  :config
-  ;; This is the command you would normally run to manually 
-  ;; install the fonts, but instead we're going to run it 
-  ;; automatically when emacs starts.
-  (all-the-icons-install-fonts t))
+    (package-install 'all-the-icons)
+    ;; Install the font files if they aren't present
+    (all-the-icons-install-fonts t)))
 
 (use-package doom-modeline
   :ensure t
