@@ -40,16 +40,13 @@ set incsearch "incremental searching
 set nohlsearch "no highlighting last searches
 set ignorecase "searching is not case sensitive
 set smartcase "if a pattern contains uppercase, searching is case sensitive
-" set autochdir "Automatically change the current directory
+set autochdir "Automatically change the current directory
 set clipboard^=unnamed,unnamedplus "use system clipboard
 set noeb vb t_vb= "remove error bells
 set t_vb= "remove visual bells
 set backspace=indent,eol,start " more powerful backspacing
 set shortmess=aoOtIF " avoid most of the 'Hit Enter ...' messages
 set laststatus=2 "always show status line
-set foldmethod=syntax
-
-filetype indent on
 
 " Interface
 set background=dark
@@ -110,7 +107,6 @@ nmap <Leader>0 <C-W>\|
 nmap <Leader>- <C-W>_
 nmap <Leader>= <C-W>=
 nmap <Leader>T <C-W>T
-nmap <Leader>cd :cd%:p:h<CR>
 
 " Tabs
 " Go to tab by number
@@ -152,25 +148,6 @@ nmap <Leader>V :Vex!<CR>
 nmap <Leader>H :Sex<CR>
 nmap <Leader>y :Tex<CR>
 
-" HTML
-" Auto-run Tidy on save for HTML files and press <CR> afterwards
-function! RunTidy()
-    let save_cursor = getpos('.')
-    let save_status = v:statusmsg
-
-    " Redirect standard error (2) to /dev/null to suppress warnings
-    silent! %!tidy -indent -wrap 0 -quiet 2>/dev/null
-
-    call setpos('.', save_cursor)
-    redraw!
-    echo save_status
-    write
-endfunction
-
-autocmd BufWritePost *.html call RunTidy()
-autocmd Filetype html setlocal expandtab tabstop=2 shiftwidth=2 softtabstop=2
-
-
 """"""""""""""""""""""
 """ Plugins
 """"""""""""""""""""""
@@ -188,124 +165,26 @@ if filereadable(expand("~/.vim/autoload/plug.vim"))
 
         Plug 'qpkorr/vim-bufkill' " Emacs kill-buffer
         Plug 'jiangmiao/auto-pairs' " Auto close parenthesis/brackets
+        Plug 'ervandew/supertab' " Tab completion
         Plug 'ap/vim-css-color' " Color hex code highlighting
-        Plug 'pseewald/vim-anyfold' " Folding
-
-        " Snippets
-        " Plug 'SirVer/ultisnips'
-        Plug 'honza/vim-snippets'
-        Plug 'natebosch/dartlang-snippets'
-
-        " CoC
-        Plug 'neoclide/coc.nvim', {'branch': 'release'}
-
-        " Web development
-        Plug 'yuezk/vim-js'
-        Plug 'HerringtonDarkholme/yats.vim'
-        Plug 'maxmellon/vim-jsx-pretty' 
 
         " Language Support
         Plug 'fatih/vim-go'
         Plug 'rust-lang/rust.vim'
-        Plug 'dart-lang/dart-vim-plugin'
     call plug#end()
 
     """"""""""""""""""""""
-    """ AnyFold 
+    """ Ultisnips 
     """"""""""""""""""""""
-    autocmd Filetype * AnyFoldActivate
-    let g:anyfold_fold_comments=1
-    set foldlevel=99
+    " Trigger configuration. You need to change this to something other than <tab> if you use one of the following:
+    " - https://github.com/Valloric/YouCompleteMe
+    " - https://github.com/nvim-lua/completion-nvim
+    let g:UltiSnipsExpandTrigger="<tab>"
+    let g:UltiSnipsJumpForwardTrigger="<c-b>"
+    let g:UltiSnipsJumpBackwardTrigger="<c-z>"
 
-    """"""""""""""""""""""
-    """ CoC 
-    """"""""""""""""""""""
-    nmap <silent> gd <Plug>(coc-definition)
-    nmap <silent> gD :call CocAction('jumpDefinition', 'vsplit')<CR>
-    nmap <silent> gi <Plug>(coc-implementation)
-    nmap <silent> gr <Plug>(coc-references)
-
-    " Symbol renaming.
-    nmap <leader>rn <Plug>(coc-rename)
-
-    " Use `[g` and `]g` to navigate diagnostics
-    " Use `:CocDiagnostics` to get all diagnostics of current buffer in location list
-    nmap <silent> [g <Plug>(coc-diagnostic-prev)
-    nmap <silent> ]g <Plug>(coc-diagnostic-next)
-
-    " Applying code actions to the selected code block
-    " Example: `<leader>aap` for current paragraph
-    xmap <leader>a  <Plug>(coc-codeaction-selected)
-    nmap <leader>a  <Plug>(coc-codeaction-selected)
-
-    " Remap keys for applying code actions at the cursor position
-    nmap <leader>ac  <Plug>(coc-codeaction-cursor)
-    " Remap keys for apply code actions affect whole buffer
-    nmap <leader>as  <Plug>(coc-codeaction-source)
-
-    " Use K to show documentation in preview window
-    nnoremap <silent> K :call <SID>show_documentation()<CR>
-    function! s:show_documentation()
-      if (index(['vim','help'], &filetype) >= 0)
-        execute 'h '.expand('<cword>')
-      elseif (coc#rpc#ready())
-        call CocActionAsync('doHover')
-      else
-        execute '!' . &keywordprg . " " . expand('<cword>')
-      endif
-    endfunction
-
-    "coc config
-    let g:coc_global_extensions = [
-      \ 'coc-flutter',
-      \ 'coc-snippets',
-      \ 'coc-yaml',
-      \ 'coc-html',
-      \ 'coc-eslint',
-      \ 'coc-tsserver',
-      \ 'coc-json',
-      \ 'coc-prettier',
-      \ 'coc-css'
-      \ ]
-
-    """"""""""""""""""""""
-    """ CoC Snippets
-    """"""""""""""""""""""
-    imap <tab> <Plug>(coc-snippets-expand)
-    let g:UltiSnipsExpandTrigger = '<Nop>'
-    let g:coc_snippet_next = '<TAB>'
-    let g:coc_snippet_prev = '<S-TAB>'
-
-    " Use <C-l> for trigger snippet expand.
-    imap <C-l> <Plug>(coc-snippets-expand)
-
-    " Use <C-j> for select text for visual placeholder of snippet.
-    vmap <C-j> <Plug>(coc-snippets-select)
-
-    " Use <C-j> for jump to next placeholder, it's default of coc.nvim
-    let g:coc_snippet_next = '<c-j>'
-
-    " Use <C-k> for jump to previous placeholder, it's default of coc.nvim
-    let g:coc_snippet_prev = '<c-k>'
-
-    " Use <C-j> for both expand and jump (make expand higher priority.)
-    imap <C-j> <Plug>(coc-snippets-expand-jump)
-
-    " Use <leader>x for convert visual selected code to snippet
-    xmap <leader>x  <Plug>(coc-convert-snippet)
-
-    inoremap <silent><expr> <TAB>
-          \ coc#pum#visible() ? coc#_select_confirm() :
-          \ coc#expandableOrJumpable() ? "\<C-r>=coc#rpc#request('doKeymap', ['snippets-expand-jump',''])\<CR>" :
-          \ CheckBackspace() ? "\<TAB>" :
-          \ coc#refresh()
-
-    function! CheckBackspace() abort
-      let col = col('.') - 1
-      return !col || getline('.')[col - 1]  =~# '\s'
-    endfunction
-
-    let g:coc_snippet_next = '<tab>'
+    " If you want :UltiSnipsEdit to split your window.
+    let g:UltiSnipsEditSplit="vertical"
 
     """"""""""""""""""""""
     """ EasyAlign 
@@ -320,9 +199,9 @@ if filereadable(expand("~/.vim/autoload/plug.vim"))
     """ FZF 
     """"""""""""""""""""""
     " Keybinds
-    nmap <silent> <Leader>f :FZF<CR>
-    nmap <silent> <Leader>g :Files %:p:h<CR>
     nmap <silent> <Leader>F :Files ~<CR>
+    nmap <silent> <Leader>f :Files %:p:h<CR>
+    nmap <silent> <Leader>g :Files ../<CR>
     nmap <Leader>b :Buffers<CR>
     nmap <Leader>a :Rg<CR>
 
@@ -348,49 +227,20 @@ if filereadable(expand("~/.vim/autoload/plug.vim"))
     nmap <Leader>Go :Git checkout<Space>
     nmap <Leader>Gps :Git push<CR>
     nmap <Leader>Gpl :Git pull<CR>
-
-    """"""""""""""""""""""""""""""""""
-    """ Language configs
-    """"""""""""""""""""""""""""""""""
-    " Golang
-    autocmd FileType go map <buffer> <M-m> :w<CR>:!clear; go run %<CR>
-    autocmd FileType go map <buffer> <M-n> :w<CR>:!clear; go run .<CR>
-    " function! GoImports()
-    "     cexpr system('goimports -e -w ' . expand('%'))
-    "     edit!
-    " endfunction
-    " au BufWritePost *.go :call GoImports()
-    let g:go_fmt_command="goimports"
-    let g:go_def_mapping_enabled=0
-    " au FileType go nmap gD <Plug>(go-def-vertical)
-    au FileType go nmap gd :GoDef<CR>
-    au FileType go nmap gD :call GoToDefSplit()<CR>
-
-    function! GoToDefSplit()
-        execute "vsp"
-        execute "GoDef"
-    endfunction
-
-    " Dart
-    let g:dart_format_on_save = 1
-    let g:dartfmt_options = ['--fix', '--line-length 120']
-    autocmd Filetype dart setlocal expandtab tabstop=2 shiftwidth=2 softtabstop=2
 endif
 
 """"""""""""""""""""""
 """ GUI Settings
 """"""""""""""""""""""
 if has("gui")
-    set guifont=Iosevka_NF:h14:W500
+    set guifont=FiraMono_NF:h14:W500
     set guioptions-=m  "remove menu bar
     set guioptions-=T  "remove toolbar
     set guioptions-=r  "remove scrollbar
     set guioptions-=L  "remove left scrollbar
     set guioptions-=e  "remove gui tabs
     au GUIEnter * set vb t_vb= "remove gui error bells
-    if has("win32")
-        au GUIEnter * simalt ~x "start fullscreen
-    endif
+    au GUIEnter * simalt ~x "start fullscreen
 end
 
 """"""""""""""""""""""
@@ -430,6 +280,27 @@ function MyTabLabel(n)
     return fnamemodify(label, ":t") 
 endfunction
 
+""""""""""""""""""""""""""""""""""
+""" Language configs
+""""""""""""""""""""""""""""""""""
+" Golang
+autocmd FileType go map <buffer> <M-m> :w<CR>:!clear; go run %<CR>
+autocmd FileType go map <buffer> <M-n> :w<CR>:!clear; go run .<CR>
+" function! GoImports()
+"     cexpr system('goimports -e -w ' . expand('%'))
+"     edit!
+" endfunction
+" au BufWritePost *.go :call GoImports()
+let g:go_fmt_command="goimports"
+let g:go_def_mapping_enabled=0
+" au FileType go nmap gD <Plug>(go-def-vertical)
+au FileType go nmap gd :GoDef<CR>
+au FileType go nmap gD :call GoToDefSplit()<CR>
+
+function! GoToDefSplit()
+    execute "vsp"
+    execute "GoDef"
+endfunction
 
 """"""""""""""""""""""""""""""""""
 """ Cursor block/line config
@@ -470,14 +341,14 @@ endif
 
 let s:palette = {}
 
-let s:palette.bg        = "#000000"
+let s:palette.bg        = "#0C1400"
 let s:palette.comment   = "#5C6773"
 let s:palette.markup    = "#F07178"
 let s:palette.constant  = "#FFEE99"
 let s:palette.operator  = "#E7C547"
 let s:palette.tag       = "#36A3D9"
 let s:palette.regexp    = "#95E6CB"
-let s:palette.string    = "#a19959"
+let s:palette.string    = "#86B300"
 let s:palette.function  = "#FFB454"
 let s:palette.special   = "#E6B673"
 let s:palette.keyword   = "#FF7733"
@@ -611,8 +482,3 @@ let g:terminal_ansi_colors += [s:palette.fg_idle, s:palette.error]
 let g:terminal_ansi_colors += [s:palette.string, s:palette.accent]
 let g:terminal_ansi_colors += [s:palette.tag, s:palette.constant]
 let g:terminal_ansi_colors += [s:palette.regexp, s:palette.comment]
-
-" Removes background in case of using transparency
-if !has("win32")
-    hi Normal guibg=NONE ctermbg=NONE
-endif

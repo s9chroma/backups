@@ -113,6 +113,7 @@ if ! shopt -oq posix; then
 fi
 
 export PATH="$PATH:/usr/sbin:/home/pavan/Software/flutter/bin:/home/pavan/Software/Android/Sdk/platform-tools"
+export GOBIN="/usr/local/bin"
 eval "$(starship init bash)"
 alias update="sudo apt update -y && sudo apt upgrade -y && sudo apt autoremove -y"
 alias v="vim"
@@ -133,3 +134,4 @@ fi
 unset __conda_setup
 # <<< conda initialize <<<
 
+. "$HOME/.cargo/env"

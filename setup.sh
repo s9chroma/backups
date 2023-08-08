@@ -4,7 +4,7 @@
 yes | sudo apt update
 
 # Install software
-yes | sudo apt install vim vim-gtk3 bspwm sxhkd polybar alacritty wget curl git nodejs npm gnome-tweaks make gcc xdotool gawk ripgrep fzf feh blueman fonts-noto-color-emoji
+yes | sudo apt install vim vim-gtk3 bspwm sxhkd polybar alacritty wget curl git nodejs npm gnome-tweaks make gcc xdotool gawk ripgrep fzf feh blueman fonts-noto-color-emoji silversearcher-ag
 
 # Install picom
 yes | sudo apt install libxext-dev libxcb1-dev libxcb-damage0-dev libxcb-xfixes0-dev libxcb-shape0-dev libxcb-render-util0-dev libxcb-render0-dev libxcb-randr0-dev libxcb-composite0-dev libxcb-image0-dev libxcb-present-dev libxcb-xinerama0-dev libxcb-glx0-dev libpixman-1-dev libdbus-1-dev libconfig-dev libgl1-mesa-dev  libpcre2-dev  libevdev-dev uthash-dev libev-dev libx11-xcb-dev
@@ -15,13 +15,6 @@ ninja -C build
 sudo ninja -C build install
 cd ..
 sudo rm -r picom
-
-# DWM
-yes | sudo apt install build-essential libx11-dev libxinerama-dev libxft-dev xutils-dev autoconf libtool fonts-symbola fonts-ipafont-gothic
-git clone https://github.com/uditkarode/libxft-bgra
-cd libxft-bgra
-sh autogen.sh --sysconfdir=/etc --prefix=/usr --mandir=/usr/share/man
-sudo make install
 
 # Install ULauncher
 wget https://github.com/Ulauncher/Ulauncher/releases/download/5.15.3/ulauncher_5.15.3_all.deb
