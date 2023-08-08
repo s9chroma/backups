@@ -11,4 +11,9 @@ echo "---" | tee -a /tmp/polybar1.log /tmp/polybar2.log
 polybar topbar 2>&1 | tee -a /tmp/polybar1.log & disown
 polybar bottombar 2>&1 | tee -a /tmp/polybar2.log & disown
 
+# Launch the autohide after killing existing script
+DIR="$(dirname "$0")"
+ps aux | grep '[a]utohide.sh' &> /dev/null && kill -9 $(ps aux | grep '[a]utohide.sh' | awk '{print $2}')
+"$DIR/autohide.sh"
+
 echo "Bars launched..."
