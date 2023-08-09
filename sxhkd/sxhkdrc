@@ -16,7 +16,7 @@ alt + Escape
 
 # tdrop
 super + Return
-    tdrop -ma -w 70% -h 80% -x 15% -y 10% alacritty -e lf
+    tdrop -ma -w 70% -h 80% -x 15% -y 10% alacritty
 
 # tdrop
 alt + Return
@@ -97,6 +97,16 @@ alt + {1-9}
 
 alt + shift + {1-9}
     bspc node -d '^{1-9}'
+
+# Toggle between current and 6th workspace
+alt + a
+    DESKTOP_ID=$(bspc query -D -d); \
+    SECOND_DESKTOP=$(bspc query -D -d ^2); \
+    if [ "$DESKTOP_ID" = "$SECOND_DESKTOP" ]; then \
+        bspc desktop -f last; \
+    else \
+        bspc desktop -f ^2; \
+    fi
 
 # Toggle between current and 6th workspace
 alt + Tab
