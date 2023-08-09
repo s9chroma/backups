@@ -1,3 +1,9 @@
+;;; .emacs --- User-specific Emacs configuration
+;;; Commentary:
+;; This file contains user-specific Emacs configurations.
+;;; Code:
+;; Avoid garbage collection during startup. Helps with perf
+
 ;; Avoid garbage collection during startup. Helps with perf
 (setq gc-cons-threshold most-positive-fixnum)
 
@@ -170,6 +176,11 @@
 
 (setq all-the-icons-scale-factor 1.1)
 
+(use-package which-key
+  :ensure t
+  :config
+  (which-key-mode))
+
 ;; LSP Mode Configuration
 (use-package lsp-mode
   :ensure t
@@ -177,14 +188,14 @@
   :hook ((dart-mode . lsp-deferred))
   :init
   (setq lsp-enable-snippet nil)  ; Disable snippets as Dart LSP doesn't support it by default
-  :config
-  (lsp-enable-which-key-integration t)
-  (setq lsp-signature-auto-activate t)
-  (setq lsp-signature-render-documentation t)
-  (setq lsp-diagnostics-provider :auto) ; Use :flycheck if you have flycheck installed and want to use it
-  ;; Use the custom variables for paths
   (setq lsp-dart-flutter-sdk-dir my-dart-flutter-sdk-path)
-  (setq lsp-dart-sdk-dir my-dart-sdk-path))
+    (setq lsp-dart-sdk-dir my-dart-sdk-path)
+  :config
+  (lsp-enable-which-key-integration t))
+
+(use-package flycheck
+  :ensure t
+  :init (global-flycheck-mode))
 
 ;; LSP UI Configuration
 (use-package lsp-ui
@@ -194,14 +205,15 @@
   :config
   (setq lsp-ui-sideline-enable t)
   (setq lsp-ui-sideline-show-diagnostics t)
+  (setq lsp-ui-sideline-show-actions t)
   (setq lsp-ui-sideline-show-hover nil)
-  (setq lsp-ui-sideline-show-code-actions t)
   (setq lsp-ui-sideline-update-mode 'line)
   (setq lsp-ui-sideline-delay 1)
   (setq lsp-ui-sideline-diagnostic-position 'top))
 
-(define-key evil-normal-state-map (kbd "C-<right>") 'flymake-goto-next-error)
-(define-key evil-normal-state-map (kbd "C-<left>") 'flymake-goto-prev-error)
+(with-eval-after-load 'lsp-mode
+  (add-hook 'lsp-mode-hook #'flycheck-mode))
+
 
 ;; LSP Dart Configuration
 (use-package lsp-dart
@@ -245,7 +257,16 @@
 (add-hook 'lsp-mode-hook 'lsp-ui-doc-mode)
 
 (with-eval-after-load 'evil
-  (define-key evil-normal-state-map (kbd "K") 'toggle-lsp-doc))
+  (define-key evil-normal-state-map (kbd "K") 'toggle-lsp-doc)
+  (define-key evil-normal-state-map (kbd "SPC RET") #'lsp-execute-code-action)
+  (define-key evil-normal-state-map (kbd "C-<right>") 'flycheck-next-error)
+  (define-key evil-normal-state-map (kbd "C-<left>") 'flycheck-previous-error)
+  (define-key evil-normal-state-map (kbd "C-<up>") 'flycheck-list-errors)
+  (define-key evil-normal-state-map (kbd "C-<down>") 
+    (lambda ()
+      (interactive)
+      (when (get-buffer "*Flycheck errors*")
+        (quit-window nil (get-buffer-window "*Flycheck errors*"))))))
 
 (use-package undo-tree
   :ensure t
@@ -753,3 +774,5 @@
 
 ;; Reset gc-hack at top
 (setq gc-cons-threshold 2000000)
+
+;;; .emacs ends here

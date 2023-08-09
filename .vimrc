@@ -341,7 +341,7 @@ endif
 
 let s:palette = {}
 
-let s:palette.bg        = "#0C1400"
+let s:palette.bg        = "#0A0A0A"
 let s:palette.comment   = "#5C6773"
 let s:palette.markup    = "#F07178"
 let s:palette.constant  = "#FFEE99"
